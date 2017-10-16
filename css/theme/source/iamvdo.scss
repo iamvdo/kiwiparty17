@@ -4,11 +4,7 @@
  * Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
 
-
-// Default mixins and settings -----------------
-@import "../template/mixins";
 @import "../template/settings";
-// ---------------------------------------------
 
 // fonts
 @font-face {
@@ -28,26 +24,47 @@
 // Background generator
 @mixin bodyBackground() {
   background: linear-gradient(to bottom right, white -50%, #{$backgroundColor} 20%, black 200%);
+  background: $backgroundColor;
 }
 $backgroundColor: #f03d36;
-$heading1Size: 1em;
 $mainFont: Atipo Light, sans-serif;
 $mainFontSize: 36px;
 $mainColor: white;
 $selectionColor: white;
 $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 
+:root {
+  font-size: $mainFontSize
+}
+@media (max-width: 800px) {
+  :root {
+    font-size: 16px
+  }
+}
+@media (max-width: 400px) {
+  :root {
+    font-size: 12px
+  }
+}
 body {
   overflow-y: auto;
   width: 100%;
+  border-top: 5px solid $backgroundColor;
 }
 
 .reveal {
   box-sizing: border-box;
 }
 
+.reveal .slides {
+  text-align: center;
+}
 .reveal .slides > section {
-  height: 100%;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 40px);
   padding: 0;
 }
 
@@ -76,13 +93,13 @@ $headingTextShadow: none;
   padding: .2em;
 }
 
-$heading1Size: 2.8em;
-$heading2Size: 1.8em;
-$heading3Size: 1.1em;
-$heading4Size: 1em;
+$heading1Size: 3rem;
+$heading2Size: 1.6rem;
+$heading3Size: 1.1rem;
+$heading4Size: 1rem;
 
 .reveal h1 { letter-spacing: -0.04em; line-height: 1.2; }
-.reveal h2 { letter-spacing: -0.02em; }
+.reveal h2 { letter-spacing: -0.02em; color: #111 !important; }
 .reveal h3 { text-align: left; background: transparent; color: #111; }
 .reveal h4 { }
 
@@ -90,8 +107,9 @@ $heading4Size: 1em;
   white-space: nowrap;
 }
 
-.reveal h1 + h2 {
-  font-size: 1.4em;
+.reveal .h2 {
+  display: block;
+  font-size: 1.4rem;
   background: transparent;
   color: #111;
 }
@@ -155,7 +173,7 @@ $heading4Size: 1em;
   pre {
     position: relative;
     z-index: 1;
-    overflow: scroll;
+    // overflow: scroll;
     -webkit-transition: z-index 0s .5s;
             transition: z-index 0s .5s;
   }
@@ -177,13 +195,13 @@ $heading4Size: 1em;
   }
   pre code {
     display: block;
-    color: black;
+    color: #777;
     position: relative;
     max-height: inherit;
     height: auto;
     font-family: Consolas, Monaco, monospace;
     font-weight: bold;
-    font-size: 1.4em;
+    font-size: .55rem;
     line-height: 1.5;
     white-space: pre-wrap;
     -moz-tab-size: 3;
@@ -213,6 +231,24 @@ $heading4Size: 1em;
     max-height: 400px;
     height: 400px;
   }
+
+  pre code::after {
+    content: 'CSS';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 .25em;
+    background: #999;
+    color: #fff
+  }
+  pre code[contenteditable]::after {
+    content: 'LIVE CSS';
+    background: deeppink;
+  }
+  pre code.language-javascript::after {
+    content: 'JS';
+  }
+
   table {
     width: 100%;
     margin: 1em 0;
@@ -446,6 +482,18 @@ $heading4Size: 1em;
     -webkit-transform: translateX(640px)translateX(-320px)rotateY(-20deg)translateX(-320px);
             transform: translateX(640px)translateX(-320px)rotateY(-20deg)translateX(-320px);
   }
+  .slides>section[data-transition="before-none"].past {
+    transform: translateX(-640px)translateX(320px)rotateY(20deg)translateX(320px);
+  }
+  .slides>section[data-transition="after-none"].future {
+    transform: translateX(640px)translateX(-320px)rotateY(-20deg)translateX(-320px);
+  }
+  .slides>section[data-transition="before-none"].future,
+  .slides>section[data-transition="after-none"].past,
+  .slides>section[data-transition="none"].past,
+  .slides>section[data-transition="none"].future {
+    transform: none;
+  }
 
 }
 
@@ -479,27 +527,74 @@ $heading4Size: 1em;
 .Showcase.slide-background {
   background: #222;
 }
+.Demo.slide-background {
+  background: #333
+}
 .part h1 {
   color: #FFF;
 }
 .iamvdo.reveal {
 
-  .Showcase-text {
-    color: #eee;
+  .Showcase,
+  .Part {
+    color: #fff;
   }
   .Jumbo {
     color: #f63752;
-    font-family: Roboto Slab, serif;
   }
-  .Jumbo-title {
-    font-size: 3em;
+  .Jumbo-title,
+  .Showcase-title,
+  .Part-title {
+    font-family: Atipo Bold, sans-serif;
+    font-size: 3rem;
     margin: .5em 0;
     letter-spacing: -.05em;
     text-align: center;
   }
-  .Jumbo-text {
-    font-size: 1.6em;
+  .Jumbo-text,
+  .Showcase-text,
+  .Part-text {
+    font-family: Atipo Light, sans-serif;
+    font-size: 1.6rem;
     text-align: center;
+  }
+  .Jumbo a,
+  .Showcase a,
+  .Part a {
+    color: inherit;
+  }
+  .Demo {
+    
+  }
+  .Demo .demo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 1px;
+    align-self: stretch;
+    background: lightblue;
+  }
+  .Demo pre {
+    margin: 0;
+    width: auto;
+    flex: 0 0 auto;
+    align-self: stretch;
+  }
+  .Demo .pres {
+    display: flex;
+    align-self: stretch;
+  }
+  .Demo .pres pre {
+    flex: 1 0 auto;
+    max-width: 60%
+  }
+  .Demo .pres pre code:only-child {
+    min-height: 100%;
+    box-sizing: border-box;
+  }
+  .Demo .pres pre code + code {
+    margin-top: 5px
   }
 
 }
@@ -517,13 +612,14 @@ $heading4Size: 1em;
   pointer-events: none;
 }
 .info-overlay {
-  font: 1.2em sans-serif;
+  font: .5rem sans-serif;
   color: #FFF;
   background: #111;
   padding: .5em 1em;
   position: fixed;
   z-index: 100;
   bottom: 0; left: 0; right: 0;
+  height: 20px
 }
 .info-overlay a {
   color: inherit;
@@ -551,15 +647,24 @@ $heading4Size: 1em;
 .iamvdo.reveal {
 
   .controls {
-    height: 1.2em;
+    height: 1em;
     bottom: 0;
     z-index: 1000;
+  }
+  .controls .enabled {
+    opacity: 1
   }
   .controls .navigate-left,
   .controls .navigate-left.enabled,
   .controls .navigate-right,
   .controls .navigate-right.enabled {
     top: 0; bottom: 0; margin: auto;
+  }
+  .controls .navigate-left.enabled {
+    border-right-color: $backgroundColor;
+  }
+  .controls .navigate-right.enabled {
+    border-left-color: $backgroundColor;
   }
 
   .controls .navigate-up,
@@ -574,7 +679,6 @@ $heading4Size: 1em;
   .controls .navigate-right.enabled:hover {
     border-left-color: #fff;
   }
-
 }
 
 
@@ -603,7 +707,6 @@ $heading4Size: 1em;
   max-height: 300px;
 }
 
-
 /*********************************************
  * PROGRESS BAR
  *********************************************/
@@ -616,6 +719,7 @@ $heading4Size: 1em;
   }
 
   .progress span {
+    background: $backgroundColor;
     -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
     transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
   }

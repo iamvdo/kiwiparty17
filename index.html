@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>{{TITLE}}</title>
+    <title>CSS Houdini, C’est plus que de la magie</title>
 
     <meta name="description" content="{{DESCRIPTION}}">
 
@@ -26,34 +26,726 @@
     <div class="reveal iamvdo language-css">
       <div class="slides">
 
-        <section>
-          <h1>{{TITLE}}</h1>
-          <h2>{{SUBTITLE}}</h2>
+        <section data-background="#f03d36">
+          <h1>CSS Houdini
+            <span class="h2">C’est plus que de la magie</span>
+          </h1>
           <p class="u-aligncenter u-small u-margin">
             Vincent De Oliveira &middot; <a href="http://twitter.com/iamvdo">@iamvdo</a>
           </p>
         </section>
 
-        <section class="me">
-          <h2>Hello, c'est <a href="http://twitter.com/iamvdo">@iamvdo</a></h2>
-          <ul class="vcard">
-            <li>Vincent De Oliveira</li>
-            <li>Formateur web <a href="http://www.ensg.eu" title="Ecole Nationale des Sciences Géographiques">ENSG Géomatique</a></li>
-            <li>Je fais du CSS
-              <ul>
-                <li><a href="http://css3create.com">CSS3Create</a>, <a href="http://iamvdo.me">iamvdo</a>, <a href="http://pleeease.io">Pleeease</a></li>
-                <li>Livre <a href="http://livre-css3.fr">CSS3 Le design web moderne</a></li>
-              </ul>
-            </li>
-          </ul>
+        <section class="Part">
+          <p class="Part-title">Hello, c’est <a href="http://twitter.com/iamvdo">@iamvdo</a></p>
+        </section>
+
+        <section class="Showcase">
+          <p class="Showcase-title">Harry Houdini</p>
+          <img src="images/houdini.png" alt="Anciennes affiches du magicien Harry Houdini.">
         </section>
 
         <section class="Jumbo">
-          <p class="Jumbo-title">{{TITLE}}</p>
-          <div class="fragment">
-            <p class="Jumbo-text">{{TEXT}}</p>
-            <p class="Jumbo-text">{{TEXT}}</p>
+          <p class="Jumbo-title">Mais alors pourquoi Houdini en CSS ?</p>
+        </section>
+
+        <section class="Showcase">
+          <p class="Showcase-title">Il est aujourd’hui <strike>difficile</strike> impossible de <em>polyfiller</em> CSS, même avec JS</p>
+        </section>
+
+        <section class="Showcase">
+          <p class="Showcase-title">L’innovation prends du temps et demande des consensus</p>
+        </section>
+
+        <section class="Jumbo">
+          <p class="Jumbo-title">Welcome Houdini</p>
+          <div class="Jumbo-text">Ou comment on va «hacker» le moteur de rendu CSS…</div>
+        </section>
+
+        <section class="Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 480 300">
+            <defs>
+              <rect id="rect" width="80" height="50"/>
+              <g id="js" transform="translate(72 8)">
+                <circle class="circle" r="7" />
+                <text class="circle-content block-text block-text--small">JS</text>
+              </g>
+              <g id="chain" transform="translate(72 8) scale(.1) translate(-50 -50)">
+                <circle class="circle" cx="50" cy="50" r="70"/>
+                <path class="circle-content" d="M28.6,71.4c2,2,5.1,2,7.1,0l35.8-35.8c2-2,2-5.1,0-7.1c-2-2-5.1-2-7.1,0L28.6,64.4C26.6,66.3,26.6,69.5,28.6,71.4z"/>
+                <path class="circle-content" d="M45.7,64.2c0.2,2.9-0.8,5.9-3,8.1L31.1,84c-4.1,4.1-10.7,4.1-14.8,0l-0.2-0.2C12,79.7,12,73,16.1,68.9l11.6-11.6c2.2-2.2,5.2-3.2,8.1-3l8-8c-7.6-3.6-17-2.3-23.3,4L9,61.9c-8,8-8,21,0,28.9L9.2,91c8,8,21,8,28.9,0l11.6-11.6c6.3-6.3,7.6-15.7,4-23.3L45.7,64.2z"/>
+                <path class="circle-content" d="M91.1,9.2L90.8,9c-8-8-21-8-28.9,0L50.3,20.6c-6.3,6.3-7.6,15.7-4,23.3l8-8c-0.2-2.9,0.8-5.9,3-8.1L69,16c4.1-4.1,10.7-4.1,14.8,0l0.2,0.2c4.1,4.1,4.1,10.7,0,14.8L72.4,42.6c-2.2,2.2-5.2,3.2-8.1,3l-8,8c7.6,3.6,17,2.3,23.3-4L91,38.1C99,30.1,99,17.2,91.1,9.2z"/>
+              </g>
+              <g id="arrow">
+                <line class="lines" x1="80" y1="25" x2="102" y2="25"/>
+                <polygon class="lines" points="102,30 110,25 102,20"/>
+              </g>
+              <g id="arrow-reverse">
+                <line class="lines" x1="0" y1="25" x2="-22" y2="25"/>
+                <polygon class="lines" points="-22,30 -30,25 -22,20"/>
+              </g>
+            </defs>
+            <style type="text/css">
+              .block,
+              .lines {
+                stroke: white;
+                fill: white;
+                stroke-miterlimit: 10;
+              }
+              .block--yes {
+                fill: #BBEA78;
+              }
+              .block--no {
+                fill: #ED7782;
+              }
+              .block-text {
+                font-family: Myriad Pro, sans-serif;
+                font-size: 13px;
+                dominant-baseline: central;
+                text-anchor: middle;
+                transform: translate(40px, 25px);
+              }
+              .block-text--small {
+                font-size: 9px;
+                transform: none;
+              }
+              .on {
+                opacity: 1
+              }
+              .off {
+                opacity: 0
+              }
+              .circle {
+                opacity: 0.5;
+              }
+              .circle-content {
+                fill: white;
+              }
+            </style>
+            <g id="HTML-CSS" transform="translate(25 70)">
+              <use xlink:href="#rect" class="block" />
+              <text class="block-text">HTML / CSS</text>
+              <use xlink:href="#arrow"/>
+            </g>
+            <g id="Parsing" transform="translate(135 70)">
+              <use xlink:href="#rect" class="block block--yes" />
+              <use xlink:href="#rect" class="block block--no fragment fade-out" data-fragment-index="1"/>
+              <text class="block-text">Parsing</text>
+              <use xlink:href="#chain" class="fragment fade-out" data-fragment-index="1"/>
+              <use xlink:href="#js" class="fragment fade-in" data-fragment-index="1"/>
+              <g class="lines">
+                <line x1="80" y1="25" x2="90" y2="25"/>
+                <line x1="90" y1="-17.5" x2="90" y2="67.5"/>
+                <line x1="90" y1="-17.5" x2="102" y2="-17.5"/>
+                <polygon points="102,-22.5 110,-17.5 102,-12.5"/>
+                <line x1="90" y1="67.5" x2="102" y2="67.5"/>
+                <polygon points="102,62.5 110,67.5 102,72.5"/>
+              </g>
+            </g>
+            <g id="DOM" transform="translate(245 35)">
+              <use xlink:href="#rect" class="block block--yes" />
+              <text class="block-text">DOM</text>
+              <use xlink:href="#js"/>
+            </g>
+            <g id="CSSOM" transform="translate(245 105)">
+              <use xlink:href="#rect" class="block block--yes" />
+              <polyline class="block block--no fragment fade-out" data-fragment-index="1" points="0,0 0,50 80,50"/>
+              <text class="block-text fragment fade-out" data-fragment-index="1">CSSOM</text>
+              <text class="block-text fragment fade-in" data-fragment-index="1">Typed OM</text>
+              <use xlink:href="#js"/>
+            </g>
+            <g id="Render_Tree" transform="translate(355 70)">
+              <g class="lines">
+                <line x1="-30" y1="-17.5" x2="-20" y2="-17.5"/>
+                <line x1="-30" y1="67.5" x2="-20" y2="67.5"/>
+                <line x1="-20" y1="-17.5" x2="-20" y2="67.5"/>
+                <line x1="-20" y1="25" x2="-8" y2="25"/>
+                <polygon points="-8,20 0,25 -8,30"/>
+              </g>
+              <use xlink:href="#rect" class="block block--yes" />
+              <use xlink:href="#rect" class="block block--no fragment fade-out" data-fragment-index="1"/>
+              <text class="block-text">Render Tree</text>
+              <use xlink:href="#chain" class="fragment fade-out" data-fragment-index="1"/>
+              <use xlink:href="#js" class="fragment fade-in" data-fragment-index="1"/>
+              <g class="lines">
+                <line x1="80" y1="25" x2="100" y2="25"/>
+                <line x1="100" y1="25" x2="100" y2="155"/>
+                <line x1="100" y1="155" x2="88" y2="155"/>
+                <polygon points="88,150 80,155 88,160"/>
+              </g>
+            </g>
+            <g id="Layout" transform="translate(355 200)">
+              <use xlink:href="#rect" class="block block--yes" />
+              <use xlink:href="#rect" class="block block--no fragment fade-out" data-fragment-index="1"/>
+              <text class="block-text">Layout</text>
+              <use xlink:href="#chain" class="fragment fade-out" data-fragment-index="1"/>
+              <use xlink:href="#js" class="fragment fade-in" data-fragment-index="1"/>
+              <use xlink:href="#arrow-reverse"/>
+            </g>
+            <g id="Paint" transform="translate(245 200)">
+              <use xlink:href="#rect" class="block block--yes" />
+              <use xlink:href="#rect" class="block block--no fragment fade-out" data-fragment-index="1"/>
+              <text class="block-text">Paint</text>
+              <use xlink:href="#chain" class="fragment fade-out" data-fragment-index="1"/>
+              <use xlink:href="#js" class="fragment fade-in" data-fragment-index="1"/>
+              <use xlink:href="#arrow-reverse"/>
+            </g>
+            <g id="Composite" transform="translate(135 200)">
+              <use xlink:href="#rect" class="block block--yes" />
+              <use xlink:href="#rect" class="block block--no fragment fade-out" data-fragment-index="1"/>
+              <text class="block-text">Composite</text>
+              <use xlink:href="#chain" class="fragment fade-out" data-fragment-index="1"/>
+              <use xlink:href="#js" class="fragment fade-in" data-fragment-index="1"/>
+              <use xlink:href="#arrow-reverse"/>
+            </g>
+            <g id="screen" transform="translate(25 200)">
+              <use xlink:href="#rect" class="block" />
+              <text class="block-text">Rendu écran</text>
+            </g>
+          </svg>
+        </section>
+
+        <section class="Showcase">
+          <p class="Showcase-title">Nombreuses APIs</p>
+          <p class="Showcase-text"><small>CSS Custom Properties</small> &middot; CSS Parser API &middot; <small>Box Tree API</small> &middot; CSS Properties and Values API &middot; <small>CSS Typed OM</small> &middot; <small>CSS Layout API</small> &middot; CSS Painting API &middot; <small>Font Metrics API</small> &middot; CSS Animation Worklet API </p>
+        </section>
+
+        <section class="Jumbo">
+          <div class="Jumbo-title">Houdini c’est du <br>JS-in-CSS</div>
+        </section>
+
+        <section class="Part">
+          <h1 class="Part-title">CSS Custom Properties</h1>
+          <p class="Part-text">Pas spécifique à Houdini</p>
+        </section>
+
+        <section class="Demo">
+          <div class="demo" id="demo1">
+            <style>
+            #demo1 {
+              background: lightblue;
+            }
+            #el1 .el {
+              width: 200px;
+              height: 200px;
+              background: white;
+              border-radius: 5px;
+              box-shadow: var(--box-shadow-x, 0)
+              var(--box-shadow-y, 3px)
+              var(--box-shadow-blur, 3px)
+              var(--box-shadow-color, rgba(0,0,0,.75));
+            }
+            #el .el:hover {
+              --box-shadow-y: 15px;
+              --box-shadow-blur: 10px;
+            }
+            </style>
+            <div id="el1">
+              <div class="el"></div>
+            </div>
           </div>
+<pre><code class="liveCoding css" data-livecoding-id="el1" contenteditable>/* Propriétés raccourcies */
+.el {
+  box-shadow: var(--box-shadow-x, 0) var(<mark>--box-shadow-y</mark>, 3px)
+              var(<mark>--box-shadow-blur</mark>, 3px)
+              var(--box-shadow-color, rgba(0,0,0,.75));
+}
+.el:hover {
+  <mark>--box-shadow-y: 15px;</mark>
+  <mark>--box-shadow-blur: 10px;</mark>
+}</code></pre>
+        </section>
+
+        <section class="Demo">
+          <div class="demo" id="demo2">
+            <style>
+            #demo2 {
+              background: lightblue;
+            }
+            #el2 {
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 3em;
+              font-weight: bold;
+              padding: 50px 0;
+              margin: 50px auto;
+              color: white;
+              text-shadow: var(--text-shadow-x, 0)
+              var(--text-shadow-y, 3px)
+              var(--text-shadow-blur, 3px)
+              var(--text-shadow-color, rgba(0,0,0,.75));
+            }
+            </style>
+            <div id="el2">
+              HELLO CSS!
+            </div>
+            <script>
+            var bounds = el2.getBoundingClientRect()
+            el2.addEventListener('mousemove', e => {
+              const x = (e.offsetX / el2.clientWidth) * 2 - 1
+              const y = (e.offsetY / el2.clientHeight) * 2 - 1
+              let blur = Math.sqrt(Math.pow(e.offsetX - (bounds.left + bounds.width) / 2, 2) + Math.pow(e.offsetY - (bounds.top + bounds.height) / 2, 2))
+              blur /= (el2.clientWidth / 2)
+              el2.style.setProperty('--text-shadow-x', x * 20 + 'px')
+              el2.style.setProperty('--text-shadow-y', y * 20 + 'px')
+              el2.style.setProperty('--text-shadow-blur', blur * 15 + 'px')
+            })
+            </script>
+          </div>
+<pre><code>/* Avec JavaScript */
+.el {
+  text-shadow: var(--text-shadow-x, 0)
+               var(--text-shadow-y, 3px)
+               var(--text-shadow-blur, 3px)
+               var(--text-shadow-color, rgba(0,0,0,.75));
+}</code></pre>
+<pre><code class="language-javascript">el.addEventListener(<mark>'mousemove'</mark>, e => {
+  el.style.<mark>setProperty('--text-shadow-x'</mark>, e.offsetX)
+  el.style.<mark>setProperty('--text-shadow-y'</mark>, e.offsetY)
+  el.style.<mark>setProperty('--text-shadow-blur'</mark>, blur)
+})</code></pre>
+        </section>
+
+        <section class="Part">
+          <h1 class="Part-title">CSS Custom Properties</h1>
+          <p class="Part-text">Avec Houdini Properties & Values API</p>
+        </section>
+
+        <section class="Demo">
+          <div class="demo" id="demo3">
+            <style>
+            #demo3 {
+              background: lightblue;
+            }
+            #el3 {
+              width: 200px;
+              height: 200px;
+              margin: 50px auto;
+              background: white;
+              border-radius: 5px;
+              --box-shadow-x: 0;
+              --box-shadow-y-el3: 3px;
+              --box-shadow-blur-el3: 3px;
+              --box-shadow-color: rgba(0,0,0,.75);
+              box-shadow: var(--box-shadow-x)
+              var(--box-shadow-y-el3)
+              var(--box-shadow-blur-el3)
+              var(--box-shadow-color);
+              transition: --box-shadow-blur-el3 .45s, --box-shadow-y-el3 .45s;
+            }
+            #el3:hover {
+              --box-shadow-y-el3: 15px;
+              --box-shadow-blur-el3: 20px;
+            }
+            </style>
+            <div id="el3"></div>
+            <script>
+            CSS.registerProperty({
+              name: '--box-shadow-blur-el3',
+              syntax: '<length>',
+              inherits: false,
+              initialValue: '0px'
+            })
+            CSS.registerProperty({
+              name: '--box-shadow-y-el3',
+              syntax: '<length>',
+              inherits: false,
+              initialValue: '0px'
+            })
+            </script>
+          </div>
+<pre><code class="language-javascript">// Déclarer notre propre propriété animable
+CSS.<mark>registerProperty</mark>({
+  name: <mark>'--box-shadow-blur'</mark>,
+  syntax: <mark>'&lt;length>'</mark>,
+  inherits: false,
+  initialValue: '0px'
+})</code></pre>
+<pre><code>.el {
+  <mark>transition-property: --box-shadow-blur, --box-shadow-y;</mark>
+  transition-duration: .45s;
+}
+.el:hover {
+  --box-shadow-y: 15px;
+  --box-shadow-blur: 10px;
+}</code></pre>
+        </section>
+
+        <section class="Part">
+          <style>
+          iframe {
+            width: 80%;
+            height: 80%;
+            background: #fff;
+          }
+          </style>
+          <p class="Part-text">Démo: <a href="http://localhost:3000/animating-gradient">Animer un dégradé</a></p>
+          <iframe src="http://localhost:3000/animating-gradient" frameborder="0"></iframe>
+        </section>
+
+        <section class="Jumbo">
+          <p class="Jumbo-title">Peut-on utiliser Houdini ?</p>
+          <p class="Jumbo-text"><a href="https://ishoudinireadyyet.com">https://ishoudinireadyyet.com</a></p>
+        </section>
+
+        <section>
+          <style>
+            #supportHoudini img {
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              top: 0;
+              margin: auto;
+              animation: none;
+            }
+          </style>
+          <div id="supportHoudini">
+            <img src="images/support.png" class="fragment fade-out" data-fragment-index="1" alt="">
+            <img src="images/support-yes.png" class="fragment fade-in" data-fragment-index="1" alt="">
+          </div>
+        </section>
+
+        <section class="Jumbo">
+          <p class="Jumbo-title">Amélioration progressive FTW</p>
+        </section>
+
+        <section class="Part">
+          <h1 class="Part-title">Creative time</h1>
+          <p class="Part-text">avec CSS Painting API</p>
+          <p class="u-small">Chrome Canary ou Chrome avec flag «web platform» activé</p>
+        </section>
+
+        <section class="Demo" data-transition="after-none">
+          <div class="demo">
+            <style>
+            #el4 {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 200px;
+              height: 200px;
+              margin: 50px auto;
+              border-radius: 5px;
+              background-color: white;
+              background-image: paint(circle);
+              overflow: hidden;
+              resize: both;
+            }
+            </style>
+            <div id="el4">CSS!</div>
+            <script>
+            (CSS.paintWorklet || paintWorklet).addModule('css/worklets/circle.js');
+            </script>
+          </div>
+          <div class="pres">
+<pre><code class="language-javascript">registerPaint('circle', class {
+  paint(ctx, geom, props, args) {
+    // Get the center point and radius
+    const x = geom.width / 2;
+    const y = geom.height / 2;
+    const radius = Math.min(x, y);
+
+    // Draw the circle
+    ctx.fillStyle = 'deeppink';
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+}</code></pre>
+<pre><code>.el {
+  background: paint(circle);
+}</code></pre>
+          </div>
+        </section>
+
+        <section class="Demo" data-transition="none">
+          <div class="demo">
+            <style>
+            #el5 .el {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 200px;
+              height: 200px;
+              margin: 50px auto;
+              border-radius: 5px;
+              background-color: white;
+              background-image: paint(circle-props);
+              overflow: hidden;
+              resize: both;
+              --circle-color: deepskyblue;
+            }
+            </style>
+            <div id="el5">
+              <div class="el">CSS!</div>
+            </div>
+            <script>
+            (CSS.paintWorklet || paintWorklet).addModule('css/worklets/circle-props.js');
+            </script>
+          </div>
+          <div class="pres">
+<pre><code class="language-javascript">registerPaint('circle-props', class {
+  <mark>static get inputProperties() { return ['--circle-color']; }</mark>
+  paint(ctx, geom, props, args) {
+    // Determine the center point and radius.
+    const x = geom.width / 2;
+    const y = geom.height / 2;
+    const radius = Math.min(x, y);
+
+    // Draw the circle
+    ctx.fillStyle = <mark>props.get('--circle-color').value</mark>;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+}</code></pre>
+<pre><code class="liveCoding css" data-livecoding-id="el5" contenteditable>.el {
+  <mark>--circle-color: deepskyblue;</mark>
+  background-image: paint(circle-props);
+}</code></pre>
+          </div>
+        </section>
+
+        <section class="Demo" data-transition="before-none">
+          <div class="demo">
+            <style>
+            #el6 .el {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 200px;
+              height: 200px;
+              margin: 50px auto;
+              border-radius: 5px;
+              color: #111;
+              background-color: white;
+              background-image: paint(circle-ripple);
+              overflow: hidden;
+              resize: both;
+              --circle-radius: 0;
+              --circle-color: deepskyblue;
+            }
+            #el6 .el.animating {
+              transition: --circle-radius 1s, --circle-color 1s;
+              --circle-radius: 300;
+              --circle-color: transparent;
+            }
+            </style>
+            <div id="el6">
+              <div class="el">Click!</div>
+            </div>
+            <script>
+            (CSS.paintWorklet || paintWorklet).addModule('css/worklets/circle-ripple.js');
+            const customProps =  [
+              {name: '--circle-radius', syntax: '<number>', initialValue: '0'},
+              {name: '--circle-color', syntax: '<color>', initialValue: '#fff8'}
+            ];
+            customProps.forEach(CSS.registerProperty);
+            const el = el6.querySelector('.el');
+            el.addEventListener('click', (evt) => {
+              el.classList.add('animating');
+              el.style.setProperty('--circle-x', evt.offsetX);
+              el.style.setProperty('--circle-y', evt.offsetY);
+            });
+            el.addEventListener('transitionend', () => {
+              el.classList.remove('animating');
+            });
+            </script>
+          </div>
+          <div class="pres">
+<pre><code class="language-javascript">registerPaint('circle-ripple', class {
+  static get inputProperties() { return ['--circle-color', <mark>'--circle-radius', '--circle-x', '--circle-y'</mark>];}
+  paint(ctx, geom, props, args) {
+    const x = <mark>props.get('--circle-x').toString();</mark>
+    const y = <mark>props.get('--circle-y').toString();</mark>
+    const radius = <mark>props.get('--circle-radius').toString();</mark>
+  }
+}</code><code class="language-javascript">el.addEventListener('click', e => {
+  el.classList.add(<mark>'animating'</mark>);
+  el.style.<mark>setProperty('--circle-x'</mark>, e.offsetX);
+  el.style.<mark>setProperty('--circle-y'</mark>, e.offsetY);
+});
+</code></pre>
+<pre><code class="liveCoding css" data-livecoding-id="el6" contenteditable>.el {
+  <mark>--circle-radius: 0;</mark>
+  --circle-color: deepskyblue;
+  background-image: paint(circle-ripple);
+}
+.el<mark>.animating</mark> {
+  <mark>transition</mark>: --circle-radius 1s,
+              --circle-color 1s;
+  --circle-radius: 300;
+  --circle-color: transparent;
+}</code></pre>
+          </div>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/conic-gradient">Polyfill <code>conic-gradient</code></a></p>
+          <iframe src="http://localhost:3000/conic-gradient" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/corners-gradient">Dégradé des 4 coins</a></p>
+          <iframe src="http://localhost:3000/corners-gradient" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/checkboxes">Case à cocher</a></p>
+          <iframe src="http://localhost:3000/checkboxes" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/background-properties">Propriétés d’arrière-plan</a></p>
+          <iframe src="http://localhost:3000/background-properties" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/rough-boxes">Bordures dessinées</a></p>
+          <iframe src="http://localhost:3000/rough-boxes" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/non-rectangular-separators">Entête non rectangulaire</a></p>
+          <iframe src="http://localhost:3000/non-rectangular-separators" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/corner-shape">Polyfill <code>corner-shape</code></a></p>
+          <iframe src="http://localhost:3000/corner-shape" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/smooth-corners">Coins arrondis <em>smooth</em></a></p>
+          <iframe src="http://localhost:3000/smooth-corners" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-text">Démo: <a href="http://localhost:3000/wobble">Effet wobble</a></p>
+          <iframe src="http://localhost:3000/wobble" frameborder="0"></iframe>
+        </section>
+
+        <section class="Part">
+          <p class="Part-title">What’s next?</p>
+          <p class="Part-text">Les autres <em>worklets</em></p>
+        </section>
+
+        <section>
+          <h2>Créer son <em>layout</em></h2>
+<pre><code class="language-javascript">registerLayout('masonry', class {
+  *layout(space, children, styleMap, edges, breakToken) {
+    // create layout
+  }
+}</code></pre>
+<pre><code>.el {
+  display: layout(masonry);
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Créer son <em>animation</em></h2>
+<pre><code class="language-javascript">registerAnimator('header', class {
+  animate(currentTime, effect) {
+    // compute
+  }
+}</code></pre>
+<pre><code class="language-javascript">const workletAnim = new WorkletAnimation('header',
+  [
+    new KeyFrameEffect($avatar,
+      [{transform: 'scale(1)'}, {transform: 'scale(0.5)'}],
+      {duration: 1, iterations: 1})
+  ],
+  new ScrollTimeline($scrollingContainer, {timeRange: 1})
+);</code></pre>
+        </section>
+
+        <section class="Part">
+          <p class="Part-title">Encore plus loin…</p>
+          <div class="Part-text">CSS Parser, Box Tree, etc.</div>
+        </section>
+
+        <section>
+          <h2>Créer ses fonctions</h2>
+<pre><code>/* fonctions de couleurs */
+.el {
+  color: <mark>alpha(red, .5)</mark>
+}
+
+.el {
+  /* préciser top, right, bottom, left */
+  position: <mark>absolute(0, 0, 0, 0)</mark>
+  /* definir le containing block */
+  position: <mark>absolute('#container')</mark>
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Créer ses sélecteurs</h2>
+<pre><code>/* pseudo-classes */
+.el<mark>:parent</mark> {
+  ...
+}
+
+/* sélecteurs de voisins précédents */
+li <mark>-</mark> li {
+  ...
+}
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Créer ses @rules</h2>
+<pre><code>/* polyfill */
+<mark>@counter-style</mark> check {
+  system: cyclic;
+  symbols: '\2713';
+  suffix: ' ';
+}
+.el {
+  list-style: check;
+}
+
+/* element queries */
+.el {
+  ...
+  <mark>@element (var(--width) <= 300px)</mark> {
+    ...
+  }
+}</code></pre>
+        </section>
+        
+        <section class="Jumbo">
+          <p class="Jumbo-title">Sky’s the limit</p>
+          <p class="Jumbo-text">Wait & See</p>
+        </section>
+
+        <section>
+          <h2>Les plus / les moins</h2>
+          <ul>
+            <li>Augmente les possibilités, <span class="fragment">mais basé sur JavaScript</span></li>
+            <li class="fragment">Gain en performance, <span class="fragment">quoique pas forcément dans tous les cas (Paint)</span></li>
+            <li class="fragment">Inexistance de standards, <span class="fragment">mais ça permettra d’innover (et donc de standardiser peut-être)</span></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Ressources</h2>
+          <ul>
+            <li>Slides: <a href="http://slides.com/malyw/houdini">CSS Houdini: From CSS Custom Properties to JavaScript Worklets and back</a></li>
+            <li>Slides: <a href="https://philipwalton.github.io/talks/2017-06-15">Houdini & Polyfilling CSS</a></li>
+            <li><a href="https://philipwalton.com/articles/the-dark-side-of-polyfilling-css/">The Dark Side of Polyfilling CSS</a></li>
+            <li><a href="https://drafts.css-houdini.org/">Houdini specs</a></li>
+            <li><a href="#">My experiments</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Merci!</h1>
+          <a href="http://slides.iamvdo.me/kiwiparty17">http://slides.iamvdo.me/kiwiparty17</a>
+          <p>Vincent De Oliveira &middot; <a href="http://twitter.com/iamvdo">@iamvdo</a> &middot; <a href="http://iamvdo.me">iamvdo.me</a></p>
         </section>
 
       </div>
@@ -61,9 +753,6 @@
 
     <div class="info-overlay" id="info-twitter">
       <a href="https://twitter.com/iamvdo">@iamvdo</a>
-    </div>
-    <div class="info-overlay" id="info-slides">
-      <a href="{{LINK}}">{{LINK}}</a>
     </div>
 
     <script src="lib/js/head.min.js"></script>
@@ -74,6 +763,12 @@
       Reveal.initialize({
         history: true,
 
+        width: "100%",
+        height: "100%",
+        margin: 0,
+        minScale: 1,
+        maxScale: 1,
+        
         // More info https://github.com/hakimel/reveal.js#dependencies
         dependencies: [
           { src: 'plugin/markdown/marked.js' },

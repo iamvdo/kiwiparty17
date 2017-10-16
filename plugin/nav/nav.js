@@ -23,7 +23,7 @@ var Nav = (function() {
 
 	txt += '<ul>';
 	for(var i = 0; i < sections.length; i++){
-		var titre = sections[i].querySelector('h1') || sections[i].querySelector('h2') || sections[i].querySelector('.questions-titre') || document.createElement('h1');
+		var titre = sections[i].querySelector('h1') || sections[i].querySelector('h2') || sections[i].querySelector('p') || document.createElement('h1');
 		var dataState = sections[i].getAttribute('data-state') || '';
 
 		if (many) {

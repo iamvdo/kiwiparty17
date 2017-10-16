@@ -753,7 +753,7 @@ html:-moz-full-screen-ancestor {
 .reveal.fade .slides section:not([data-transition]),
 .reveal.fade .slides>section>section:not([data-transition]) {
 	transform: none;
-	transition: opacity 0.5s;
+	// transition: opacity 0.5s;
 }
 
 

@@ -1,11 +1,11 @@
 .vdoMenu{
 	position: fixed;
-	top: 10px;
+	top: 5px;
 	left: 0; right: 0;
 	height: 20px;
 	z-index: 500;
 	opacity: 0;
-	font: 1em sans-serif;
+	font: .4rem sans-serif;
 }
 .vdoMenu:hover{
 	opacity: 1;
