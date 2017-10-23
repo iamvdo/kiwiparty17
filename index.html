@@ -540,6 +540,8 @@ CSS.<mark>registerProperty</mark>({
             <script>
             (CSS.paintWorklet || paintWorklet).addModule('css/worklets/circle-ripple.js');
             const customProps =  [
+              {name: '--circle-x', syntax: '<number>', initialValue: '0'},
+              {name: '--circle-y', syntax: '<number>', initialValue: '0'},
               {name: '--circle-radius', syntax: '<number>', initialValue: '0'},
               {name: '--circle-color', syntax: '<color>', initialValue: '#fff8'}
             ];
