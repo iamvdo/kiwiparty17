@@ -441,7 +441,7 @@ CSS.<mark>registerProperty</mark>({
             </script>
           </div>
           <div class="pres">
-<pre><code class="language-javascript">registerPaint('circle', class {
+<pre><code class="language-javascript">registerPaint(<mark>'circle'</mark>, class {
   paint(ctx, geom, props, args) {
     // Get the center point and radius
     const x = geom.width / 2;
@@ -449,14 +449,14 @@ CSS.<mark>registerProperty</mark>({
     const radius = Math.min(x, y);
 
     // Draw the circle
-    ctx.fillStyle = 'deeppink';
+    ctx.fillStyle = <mark>'deeppink'</mark>;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
     ctx.fill();
   }
 }</code></pre>
 <pre><code>.el {
-  background: paint(circle);
+  background: paint(<mark>circle</mark>);
 }</code></pre>
           </div>
         </section>
