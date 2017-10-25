@@ -776,7 +776,8 @@ li <mark>-</mark> li {
         dependencies: [
           { src: 'plugin/markdown/marked.js' },
           { src: 'plugin/markdown/markdown.js' },
-          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'socket.io/socket.io.js', async: true },
+          { src: 'plugin/notes-server/client.js', async: true },
           { src: 'plugin/prismjs/prism.js', async: true, callback: function () { Prism.highlightAll(); } },
           { src: 'plugin/prefixfree/prefixfree.js', async: true },
           { src: 'plugin/live-coding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }},
