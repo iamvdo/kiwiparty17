@@ -8,7 +8,7 @@
 
     <meta name="description" content="Conférence KiwiParty BlendWebMix 2017">
 
-    <link rel="icon" href="http://iamvdo.me/images/favicon.png"/>
+    <link rel="icon" href="https://iamvdo.me/images/favicon.png"/>
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/iamvdo.css">
@@ -381,8 +381,8 @@ CSS.<mark>registerProperty</mark>({
             background: #fff;
           }
           </style>
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/animating-gradient">Animer un dégradé</a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/animating-gradient" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/animating-gradient">Animer un dégradé</a></p>
+          <iframe src="https://css-houdini.rocks/animating-gradient" frameborder="0"></iframe>
         </section>
 
         <section class="Jumbo">
@@ -540,17 +540,20 @@ CSS.<mark>registerProperty</mark>({
             <script>
             (CSS.paintWorklet || paintWorklet).addModule('css/worklets/circle-ripple.js');
             const customProps =  [
-              {name: '--circle-x', syntax: '<number>', initialValue: '0'},
-              {name: '--circle-y', syntax: '<number>', initialValue: '0'},
-              {name: '--circle-radius', syntax: '<number>', initialValue: '0'},
-              {name: '--circle-color', syntax: '<color>', initialValue: '#fff8'}
+              {name: '--circle-x', syntax: '<number>', inherits: true, initialValue: '0'},
+              {name: '--circle-y', syntax: '<number>', inherits: true, initialValue: '0'},
+              {name: '--circle-radius', syntax: '<number>', inherits: true, initialValue: '0'},
+              {name: '--circle-color', syntax: '<color>', inherits: true, initialValue: '#fff8'}
             ];
             customProps.forEach(CSS.registerProperty);
             const el = el6.querySelector('.el');
             el.addEventListener('click', (evt) => {
-              el.classList.add('animating');
-              el.style.setProperty('--circle-x', evt.offsetX);
-              el.style.setProperty('--circle-y', evt.offsetY);
+              el.classList.remove('animating');
+              requestAnimationFrame(() => {
+                el.classList.add('animating');
+                el.style.setProperty('--circle-x', evt.offsetX);
+                el.style.setProperty('--circle-y', evt.offsetY);
+              });
             });
             el.addEventListener('transitionend', () => {
               el.classList.remove('animating');
@@ -586,48 +589,48 @@ CSS.<mark>registerProperty</mark>({
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/conic-gradient">Polyfill <code>conic-gradient</code></a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/conic-gradient" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/conic-gradient">Polyfill <code>conic-gradient</code></a></p>
+          <iframe src="https://css-houdini.rocks/conic-gradient" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/corners-gradient">Dégradé des 4 coins</a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/corners-gradient" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/corners-gradient">Dégradé des 4 coins</a></p>
+          <iframe src="https://css-houdini.rocks/corners-gradient" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/checkboxes">Case à cocher</a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/checkboxes" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/checkboxes">Case à cocher</a></p>
+          <iframe src="https://css-houdini.rocks/checkboxes" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/background-properties">Propriétés d’arrière-plan</a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/background-properties" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/background-properties">Propriétés d’arrière-plan</a></p>
+          <iframe src="https://css-houdini.rocks/background-properties" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/rough-boxes">Bordures dessinées</a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/rough-boxes" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/rough-boxes">Bordures dessinées</a></p>
+          <iframe src="https://css-houdini.rocks/rough-boxes" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/non-rectangular-separators">Entête non rectangulaire</a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/non-rectangular-separators" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/non-rectangular-separators">Entête non rectangulaire</a></p>
+          <iframe src="https://css-houdini.rocks/non-rectangular-separators" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/corner-shape">Polyfill <code>corner-shape</code></a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/corner-shape" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/corner-shape">Polyfill <code>corner-shape</code></a></p>
+          <iframe src="https://css-houdini.rocks/corner-shape" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/smooth-corners">Coins arrondis <em>smooth</em></a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/smooth-corners" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/smooth-corners">Coins arrondis <em>smooth</em></a></p>
+          <iframe src="https://css-houdini.rocks/smooth-corners" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
-          <p class="Part-text">Démo : <a href="http://lab.iamvdo.me/houdini/wobble">Effet wobble</a></p>
-          <iframe src="http://lab.iamvdo.me/houdini/wobble" frameborder="0"></iframe>
+          <p class="Part-text">Démo : <a href="https://css-houdini.rocks/wobble">Effet wobble</a></p>
+          <iframe src="https://css-houdini.rocks/wobble" frameborder="0"></iframe>
         </section>
 
         <section class="Part">
@@ -740,14 +743,14 @@ li <mark>-</mark> li {
             <li>Slides : <a href="https://philipwalton.github.io/talks/2017-06-15">Houdini & Polyfilling CSS</a></li>
             <li><a href="https://philipwalton.com/articles/the-dark-side-of-polyfilling-css/">The Dark Side of Polyfilling CSS</a></li>
             <li><a href="https://drafts.css-houdini.org/">Houdini specs</a></li>
-            <li><a href="http://lab.iamvdo.me/houdini">Mes expériences avec CSS Houdini</a></li>
+            <li><a href="https://css-houdini.rocks">Mes expériences avec CSS Houdini</a></li>
           </ul>
         </section>
 
         <section>
           <h1>Merci !</h1>
           <a href="http://slides.iamvdo.me/kiwiparty17">http://slides.iamvdo.me/kiwiparty17</a>
-          <a href="http://lab.iamvdo.me/houdini">http://lab.iamvdo.me/houdini</a>
+          <a href="https://css-houdini.rocks">https://css-houdini.rocks</a>
           <p>Vincent De Oliveira &middot; <a href="http://twitter.com/iamvdo">@iamvdo</a> &middot; <a href="http://iamvdo.me">iamvdo.me</a></p>
         </section>
 
